@@ -1,0 +1,718 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    :root {
+      --bg-color: #ffffff;
+      --primary-color: #ff4081;
+      --text-color: #000000;
+    }
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+    }
+
+    body > .containers {
+  padding-left: 4rem;
+  padding-right: 4rem;
+  background-color: white;
+}
+
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+      overflow-x: hidden;
+      animation: backgroundAnimation 10s infinite alternate;
+    }
+
+    @keyframes backgroundAnimation {
+      0% { background: linear-gradient(135deg, #ff4081, #0d6efd); }
+      50% { background: linear-gradient(135deg, #00bcd4, #ff4081); }
+      100% { background: linear-gradient(135deg, #0d6efd, #ff4081); }
+    }
+
+    h1, h2, h3 {
+      font-family: 'Merriweather', serif;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background: url(/misurina-sunset.jpg) center/cover no-repeat;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      animation: heroAnimation 3s ease-out;
+    }
+
+    @keyframes heroAnimation {
+      0% { opacity: 0; transform: translateY(100px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Glassmorphism Card */
+    .card {
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    /* Gradient Hover Effects */
+    .btn-gradient {
+      background: linear-gradient(45deg, #ff4081, #0d6efd);
+      color: #fff;
+      border: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .btn-gradient:hover {
+      background: linear-gradient(45deg, #0d6efd, #ff4081);
+      transform: scale(1.1);
+    }
+
+    /* Hover Zoom on Image */
+    .card-img-top {
+      transition: transform 0.3s ease;
+    }
+    .card-img-top:hover {
+      transform: scale(1.1);
+    }
+
+
+    /* Scroll Animations */
+    .aos-animate {
+      animation-duration: 1s !important;
+      animation-timing-function: ease-out !important;
+    }
+
+    /* Progress Bar Styles */
+    .skill-bar {
+      position: relative;
+      background-color: #e0e0e0;
+      height: 10px;
+      border-radius: 10px;
+    }
+    .skill-fill {
+      height: 100%;
+      background-color: var(--primary-color);
+      border-radius: 10px;
+      transition: width 1s ease-out;
+    }
+
+    /* Preloader */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .preloader .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #ff4081;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    .carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-image: none; /* Remove default icon */
+  width: 40px;
+  height: 40px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.carousel-control-prev-icon::after,
+.carousel-control-next-icon::after {
+  content: '';
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+  transform: rotate(135deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -6px;
+  margin-left: -4px;
+}
+
+.carousel-control-next-icon::after {
+  transform: rotate(-45deg);
+}
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Navbar Glow Effect */
+    .navbar {
+      transition: box-shadow 0.3s ease-in-out;
+    }
+    .navbar-nav .nav-link {
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #ff4081;
+      text-shadow: 0 0 10px #ff4081, 0 0 20px #ff4081, 0 0 30px #ff4081;
+    }
+    .navbar:hover {
+      box-shadow: 0 4px 10px rgba(255, 64, 129, 0.6);
+    }
+
+    .social-icons a {
+      transition: transform 0.3s ease, color 0.3s ease;
+      margin: 0 10px;
+      font-size: 1.5rem;
+    }
+    .social-icons a:hover {
+      color:  #0d6efd;
+      transform: scale(1.1);
+      text-shadow: 0 0 10px #0d6efd, 0 0 20px #0d6efd;
+    }
+
+    /* Back to Top Button */
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: none;
+      background-color: #ff4081;
+      border-radius: 50%;
+      padding: 10px;
+      z-index: 999;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      pointer-events: none;
+      display: none;
+    }
+
+    .timeline {
+  position: relative;
+  margin-left: 20px;
+  border-left: 4px solid #ff4081;
+  padding-left: 20px;
+}
+.timeline-item {
+  margin-bottom: 20px;
+  padding-left: 10px;
+  position: relative;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  background-color: #ff4081;
+  border-radius: 50%;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="spinner"></div>
+  </div>
+  
+  
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">MickyCtech</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item">
+            <a class="nav-link theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
+              <i class="fas fa-adjust"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container" data-aos="fade-up">
+      <h1 id="typed-output"></h1>
+      <p class="lead">Building sleek and modern websites, one line of code at a time.</p>
+      <a href="#contact" class="btn btn-gradient btn-lg mt-4">Get In Touch</a>
+    </div>
+  </section>
+  <div class="containers">
+
+  <!-- About Section -->
+<section id="about" class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <h2 class="text-center section-title">About Me</h2>
+    <div class="row align-items-center">
+      <div class="col-md-4 text-center">
+        <img src="/img_1646 (1).jpg" class="img-fluid rounded-circle" alt="Profile" />
+      </div>
+      <div class="col-md-8">
+        <p class="fs-6">Hey! I'm <strong>Micky</strong>, a passionate front-end developer who loves creating sleek, modern, and interactive digital experiences. With a strong foundation in web technologies and a keen eye for detail, I craft interfaces that are not only visually appealing but also highly functional and user-friendly. When I'm not coding, I'm exploring the latest tech trends or sketching new UI ideas.</p>
+        <a href="Michael_Chisimdi_Resume_Compact_1Page.pdf" class="btn btn-gradient mt-3" download><i class="fas fa-download"></i> Download Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-5">
+  <div class="container" data-aos="fade-up">
+    <h2 class="text-center section-title">Skills</h2>
+    <div class="row text-center">
+      <div class="col-md-3 mb-4">
+        <div class="card p-3">
+          <i class="fab fa-html5 fa-3x text-danger mb-2"></i>
+          <h5>HTML5</h5>
+          <p class="small">Expert in semantic markup and responsive structure.</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card p-3">
+          <i class="fab fa-css3-alt fa-3x text-primary mb-2"></i>
+          <h5>CSS3</h5>
+          <p class="small">Mastery of Flexbox, Grid, and animations for modern UI design.</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card p-3">
+          <i class="fab fa-js fa-3x text-warning mb-2"></i>
+          <h5>JavaScript</h5>
+          <p class="small">Skilled in DOM manipulation, ES6+, and interactive UI features.</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card p-3">
+          <i class="fab fa-php fa-3x text-secondary mb-2"></i>
+          <h5>PHP</h5>
+          <p class="small">Experienced in building dynamic back-end logic and APIs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <h2 class="text-center section-title">Featured Projects</h2>
+    <div class="row">
+      <!-- Project 1 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="Screenshot 2025-05-22 075718.png" class="card-img-top" alt="Project 1">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Modern Portfolio</h5>
+            <p class="card-text flex-grow-1">A clean, responsive portfolio site showcasing creative work using HTML, CSS, and JavaScript.</p>
+            <a href="#" class="btn btn-gradient mt-auto">View Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- Project 2 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="Screenshot 2025-05-22 080126.png" class="card-img-top" alt="Project 2">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Investment Website</h5>
+            <p class="card-text flex-grow-1">A dynamic investment platform built with PHP, designed for robust performance and secure transactions.</p>
+            <a href="http://challoninves.fwh.is/index.php" class="btn btn-gradient mt-auto">View Project</a>
+          </div>
+        </div>
+      </div>
+      <!-- Project 3 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="Screenshot 2025-05-22 081705.png" class="card-img-top" alt="Project 3">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">A Wish Project</h5>
+<p class="card-text flex-grow-1">
+  An experimental front-end project that lets users express their dreams through clean visuals and subtle interactivity—built from the ground up using HTML, CSS, and JavaScript.
+</p>
+            <a href="#" class="btn btn-gradient mt-auto">View Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Testimonials Section -->
+<section id="testimonials" class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <h2 class="text-center section-title mb-5">What People Say</h2>
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner text-center">
+        <div class="carousel-item active">
+          <div class="card shadow-sm border-0 p-4">
+            <img src="https://i.pravatar.cc/100?img=1" class="rounded-circle mx-auto mb-3" width="80" height="80" alt="Client 1">
+            <blockquote class="blockquote">
+              <div class="text-warning mt-3">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+              <p class="mb-3">“A pleasure to work with! Delivered everything on time with excellent communication.”</p>
+              <footer class="blockquote-footer">John Doe, <cite title="Company">CEO TechCorp</cite></footer>
+            </blockquote>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="card shadow-sm border-0 p-4">
+            <img src="https://i.pravatar.cc/100?img=5" class="rounded-circle mx-auto mb-3" width="80" height="80" alt="Client 2">
+            <blockquote class="blockquote">
+              <div class="text-warning mt-3">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+              <p class="mb-3">“Outstanding skills and a great sense of design. We loved the final website!”</p>
+              <footer class="blockquote-footer">Jane Smith, <cite title="Company">Founder, StartupX</cite></footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Timeline Section -->
+<section id="timeline" class="py-5">
+  <div class="container" data-aos="fade-up">
+    <h2 class="text-center section-title mb-5">My Journey</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="card p-3 shadow-sm border-start border-3 border-primary">
+          <h5 class="mb-1"><i class="fas fa-laptop-code me-2 text-primary"></i>2022 - Started Learning Web Development</h5>
+          <p class="mb-0">Built foundational skills in HTML, CSS, and JavaScript through self-study and online courses.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="card p-3 shadow-sm border-start border-3 border-success">
+          <h5 class="mb-1"><i class="fas fa-briefcase me-2 text-success"></i>2023 - Intern at WebDev Studio</h5>
+          <p class="mb-0">Worked on real-world projects in a team environment. Learned Agile practices and Git.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="card p-3 shadow-sm border-start border-3 border-warning">
+          <h5 class="mb-1"><i class="fas fa-globe me-2 text-warning"></i>2024 - Freelance Projects</h5>
+          <p class="mb-0">Successfully delivered websites and dashboards to clients using modern web stacks.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="card p-3 shadow-sm border-start border-3 border-danger">
+          <h5 class="mb-1"><i class="fas fa-code me-2 text-danger"></i>2025 – PHP Mastery</h5>
+          <p class="mb-0">Developed advanced back-end applications and APIs with robust PHP frameworks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <h2 class="text-center section-title mb-4">Contact Me</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <form action="https://formspree.io/f/xrbqvplr" method="POST" id="contact-form" class="card p-4 shadow-sm border-0">
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+    <label for="name"><i class="fas fa-user me-2"></i>Your Name</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+    <label for="email"><i class="fas fa-envelope me-2"></i>Email address</label>
+  </div>
+  <div class="form-floating mb-3">
+    <textarea class="form-control" id="message" name="message" placeholder="Your message here..." style="height: 150px" required></textarea>
+    <label for="message"><i class="fas fa-comment-dots me-2"></i>Your Message</label>
+  </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-gradient px-4" onclick="showConfetti()">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Newsletter Section -->
+<section id="newsletter" class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <div class="card p-4 shadow-lg border-0 rounded-4 bg-white">
+      <div class="row align-items-center">
+        <div class="col-md-6 mb-3 mb-md-0 text-center text-md-start">
+          <h3 class="fw-bold mb-2">Stay in the Loop!</h3>
+          <p class="mb-0 text-muted">Join our newsletter and be the first to know about fresh projects, trends, and resources for developers.</p>
+        </div>
+        <div class="col-md-6">
+          <form action="https://formspree.io/f/xrbqvplr" method="POST" id="newsletter-form" class="d-flex flex-column flex-md-row">
+            <input type="email" name="email" id="newsletter-email" class="form-control me-md-2 mb-2 mb-md-0 rounded-pill px-4" placeholder="Your Email" required>
+            <button type="submit" class="btn btn-gradient rounded-pill px-4">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <div class="container text-center">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/michael_simtech/" target="_blank" class="text-white"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/don.chisyno/" target="_blank" class="text-white"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.linkedin.com/in/don-chisyno-9268a6307" target="_blank" class="text-white"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/chisyno" target="_blank" class="text-white"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2025 MyPortfolio by MickyCtech. All rights reserved.</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" class="btn btn-primary rounded-circle">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Confetti -->
+  <div class="confetti" id="confetti"></div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- JavaScript to handle submission -->
+<script>
+document.getElementById("contact-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: form.method,
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Message Sent!',
+        text: 'Thank you for reaching out. I’ll get back to you soon.',
+        confirmButtonColor: '#ff4081'
+      });
+      form.reset(); // Clear the form
+    } else {
+      return response.json().then(data => {
+        throw new Error(data.error || "Something went wrong.");
+      });
+    }
+  })
+  .catch(error => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops!',
+      text: error.message,
+      confirmButtonColor: '#ff4081'
+    });
+  });
+});
+
+
+document.getElementById("newsletter-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: form.method,
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Subscribed!',
+        text: 'Thank you for subscribing to our newsletter.',
+        confirmButtonColor: '#3085d6'
+      });
+      form.reset();
+    } else {
+      throw new Error("Subscription failed. Please try again.");
+    }
+  })
+  .catch(error => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops!',
+      text: error.message,
+      confirmButtonColor: '#d33'
+    });
+  });
+});
+</script>
+
+  <script>
+
+
+    // Typed.js animation
+    var options = {
+      strings: ["Hi, My name is Micky and I'm a Web Developer", "I love building interactive websites", "Coding is my passion"],
+      typeSpeed: 50,
+      backSpeed: 50,
+      backDelay: 1000,
+      loop: true
+    };
+    var typed = new Typed("#typed-output", options);
+
+    AOS.init();
+
+    // Preloader Removal
+    window.onload = function() {
+      setTimeout(() => document.getElementById('preloader').style.display = 'none', 1000);
+    };
+
+    // Theme Toggle
+    function toggleTheme() {
+      const theme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    }
+
+    // Back to Top Button
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = "block";
+      } else {
+        backToTop.style.display = "none";
+      }
+    });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Confetti Animation
+    function showConfetti() {
+      const confetti = document.getElementById("confetti");
+      confetti.style.display = "block";
+      setTimeout(() => {
+        confetti.style.display = "none";
+      }, 5000);
+    }
+
+    // Project Filter Logic
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.project-item').forEach(item => {
+        if (filter === 'all' || item.classList.contains(filter)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  </script>
+
+  <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/66f1790e4cbc4814f7dd90e5/1i8fk1oti';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
